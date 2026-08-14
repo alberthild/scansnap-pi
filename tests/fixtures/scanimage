@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+printf '%s\n' "$*" > "${TEST_SCAN_ARGS:?}"
+printf '%s\n' 'scanimage: sane_start: Document feeder out of documents' >&2
+exit 7

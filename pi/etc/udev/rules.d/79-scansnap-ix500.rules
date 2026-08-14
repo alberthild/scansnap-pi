@@ -1,0 +1,2 @@
+# Fujitsu ScanSnap iX500 — Zugriff für scanner-Gruppe
+ATTRS{idVendor}=="04c5", ATTRS{idProduct}=="132b", MODE="0664", GROUP="scanner", ENV{libsane_matched}="yes"

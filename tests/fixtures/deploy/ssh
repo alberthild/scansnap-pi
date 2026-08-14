@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ "${2:-}" == *"id 'scansnap'"* ]]; then
+  exit 0
+fi
+
+PATH="${TEST_REMOTE_BIN:?}:$PATH" sh -c "${2:?missing remote command}"

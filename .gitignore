@@ -1,0 +1,17 @@
+# Secrets
+**/scansnap.env
+!**/scansnap.env.example
+*.token
+
+# Scan-Artefakte
+*.pdf
+*.jpg
+*.jpeg
+scansnap-pending/
+scansnap-failed/
+
+# Logs
+*.log
+
+# OS
+.DS_Store

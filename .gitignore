@@ -1,5 +1,6 @@
 # Secrets
 **/scansnap.env
+**/owncloud.env
 !**/scansnap.env.example
 *.token
 
@@ -9,6 +10,8 @@
 *.jpeg
 scansnap-pending/
 scansnap-failed/
+scansnap-spool/
+__pycache__/
 
 # Logs
 *.log

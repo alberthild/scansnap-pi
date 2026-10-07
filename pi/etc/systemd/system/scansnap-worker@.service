@@ -1,0 +1,21 @@
+[Unit]
+Description=ScanSnap background processing for %i
+After=network-online.target scansnap-status-led.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=%i
+Environment=HOME=/home/%i
+ExecStart=/home/%i/bin/scansnap-worker.sh worker
+Restart=on-failure
+RestartSec=5
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+KillMode=control-group
+TimeoutStopSec=20
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

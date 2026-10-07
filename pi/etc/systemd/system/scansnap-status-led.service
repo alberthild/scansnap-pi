@@ -1,0 +1,11 @@
+[Unit]
+Description=Initialize ScanSnap status LED
+After=scanbd.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/libexec/scansnap-status-led init
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

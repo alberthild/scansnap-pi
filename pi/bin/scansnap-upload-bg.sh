@@ -3,6 +3,19 @@
 # Aufruf: scansnap-upload-bg.sh <pfad-zur-pdf>
 set -uo pipefail
 
+status_led() {
+  if [[ -n "${SCANSNAP_LED_JOB_ID:-}" && -x "$HOME/bin/scansnap-led.sh" ]]; then
+    "$HOME/bin/scansnap-led.sh" "$1" "$SCANSNAP_LED_JOB_ID" || true
+  fi
+}
+finish_upload() {
+  local rc=$?
+  trap - EXIT
+  if (( rc == 0 )); then status_led end; else status_led fail; fi
+  exit "$rc"
+}
+trap finish_upload EXIT
+
 PDF="${1:?Pfad zur PDF fehlt}"
 [[ -f "$PDF" ]] || { echo "PDF nicht gefunden: $PDF" >&2; exit 1; }
 
@@ -13,7 +26,7 @@ RETRIES=3
 RETRY_WAIT=10
 
 [[ -r "$SCANSNAP_CONFIG" ]] || { echo "ERROR: $SCANSNAP_CONFIG is not readable" >&2; exit 2; }
-set -a; source "$SCANSNAP_CONFIG"; set +a
+source "$(dirname "$0")/scansnap-config.sh" || exit 2
 : "${WEBDAV_URL:?WEBDAV_URL is not set}"
 : "${WEBDAV_USER:?WEBDAV_USER is not set}"
 : "${WEBDAV_PASSWORD:?WEBDAV_PASSWORD is not set}"

@@ -1,0 +1,2 @@
+# The root-owned helper accepts only status actions and bounded job IDs.
+scansnap ALL=(root) NOPASSWD: /usr/local/libexec/scansnap-status-led

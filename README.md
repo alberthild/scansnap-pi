@@ -74,13 +74,14 @@ the same pipeline.
 
 ```bash
 systemctl status scanbd
+systemctl status scansnap-worker@scansnap.service
+journalctl -u scansnap-worker@scansnap.service -n 60 --no-pager
 tail -f /home/scansnap/scansnap.log
-ls /home/scansnap/scansnap-pending /home/scansnap/scansnap-failed
+ls /home/scansnap/scansnap-spool/{capturing,queued,processing,failed,done}
 ```
 
 `scanbd` owns the scanner while running. Stop it before using `scanimage`
-manually. Failed uploads are moved to `scansnap-failed` instead of being
-deleted.
+manually. Failed jobs are retained in `scansnap-spool/failed` for recovery.
 
 Each button press captures one stack into `~/scansnap-spool`. After capture
 and durable storage, the scanner is free for the next stack. A single
@@ -131,6 +132,7 @@ Run the configuration test on any system with Bash:
 
 ```bash
 tests/test-upload-config.sh
+bash tests/test-deploy-failure.sh
 ```
 
 Run the image integration test on a system with ImageMagick 6:

@@ -73,8 +73,8 @@ explicit message when capture completes and the scanner becomes available.
 
 ## Existing installation and deployment
 
-Update the repository's dedicated `scansnap` account deployment and the live
-existing installations with a custom scan account. Back up installed scripts first; preserve
+Support the repository's dedicated `scansnap` account and existing installations
+with a custom scan account. Back up installed scripts first; preserve
 the live ownCloud configuration and account. Install only when no scan or
 upload is running. Keep the current normalizer and processing settings.
 
